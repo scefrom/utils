@@ -10,3 +10,11 @@
 
 # Built Visual Studio Code Extensions
 *.vsix
+
+# Object files
+*.o
+*.obj
+
+# Executables
+*.exe
+bin
