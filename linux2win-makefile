@@ -1,0 +1,32 @@
+CC=x86_64-w64-mingw32-gcc
+
+CFLAGS=-g -Wall -lm -fPIC #-O3
+
+SRC=./src
+
+BIN=bin.exe
+
+
+
+%.o: %.c
+	$(CC) -c $(CFLAGS) $< -o $@
+
+%.asm: %.c
+	$(CC) -S $(CFLAGS) $<
+
+
+
+.PHONY: all asm clean clean-all
+
+all: $(patsubst %.c,%.o,$(wildcard $(SRC)/*.c))
+	$(CC) $(CFLAGS) $^ -o $(BIN)
+
+asm: $(patsubst %.c,%.asm,$(wildcard $(SRC)/*.c))
+
+
+
+clean:
+	rm -f $(SRC)/*.o
+
+clean-all: clean
+	rm -f $(BIN)
