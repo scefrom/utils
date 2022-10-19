@@ -25,12 +25,10 @@ void *__stack_pop(stack_t *stack) {
 
 
 stack_t __stack_init(size_t start_n, size_t el_size, uint8_t grow_mode) {
-	size_t size = start_n * el_size;
-
 	return (stack_t) {
-		.stack = malloc(size),
+		.stack = malloc(start_n * el_size),
 		.index = 0,
-		.size = size,
+		.size = start_n,
 
 		.__el_size = el_size,
 		.__grow_mode = grow_mode

@@ -5,11 +5,12 @@
 #ifndef __STACK_H
 #define __STACK_H
 
-#define stack_push(stack, X)						__stack_push(stack, (void*) &(X))
-#define stack_pop(stack)							__stack_pop(stack)
+#define stack_push(__stack, X)						__stack_push(&(__stack), (void*) &(X))
+#define stack_pop(__stack)							__stack_pop(__stack)
+#define stack_fetch(__stack, index)					(((uint8_t*) __stack.stack)[index * __stack.__el_size])
 
 #define stack_init(start_n, mode, TYPE)				__stack_init(start_n, sizeof(TYPE), mode)
-#define stack_free(stack)							__stack_free(stack)
+#define stack_free(__stack)							__stack_free(__stack)
 
 #include "commons.h"
 
