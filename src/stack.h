@@ -9,7 +9,7 @@
 #define stack_pop(__stack)							__stack_pop(__stack)
 #define stack_fetch(__stack, index)					(((uint8_t*) __stack.stack)[index * __stack.__el_size])
 
-#define stack_init(start_n, mode, TYPE)				__stack_init(start_n, sizeof(TYPE), mode)
+#define stack_init(start_n, TYPE, mode)				__stack_init(start_n, sizeof(TYPE), mode)
 #define stack_free(__stack)							__stack_free(__stack)
 
 #include "commons.h"

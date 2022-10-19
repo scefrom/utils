@@ -9,7 +9,7 @@
 
 int main(int argc, char **argv) {
 	//stack demo:
-	stack_t stack = stack_init(4, STACK_GROW_LEAST, size_t);
+	stack_t stack = stack_init(4, size_t, STACK_GROW_LEAST);
 
 	size_t x = 10;
 	stack_push(stack, x);
