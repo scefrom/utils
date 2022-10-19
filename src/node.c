@@ -65,7 +65,7 @@ void node_tbfr_append_tabs(bfr_t *bfr, size_t rec) {
 	bfr_append(bfr, tabs);
 }
 
-void node_tbfr(bfr_t *bfr, bfr_t *src, node_t node, char **id_map, node_value_fn *value_fn, size_t rec) {
+void node_tbfr(bfr_t *bfr, bfr_t src, node_t node, char **id_map, node_value_fn *value_fn, size_t rec) {
 	node_tbfr_append_tabs(bfr, rec);
 
 	bfr_append(bfr, BFR_FROM_STR_NO_NULL(id_map[node.id]));

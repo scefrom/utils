@@ -6,7 +6,8 @@
 #define __STACK_H
 
 #define stack_push(__stack, X)						__stack_push(&(__stack), (void*) &(X))
-#define stack_pop(__stack, TYPE)					(*((TYPE*) __stack_pop(&(__stack))))
+#define stack_pop(__stack)							__stack_pop(&(__stack))
+#define stack_get_pop(__stack, TYPE)				(*((TYPE*) stack_pop(__stack)))
 #define stack_fetch(__stack, index, TYPE)			(((TYPE*) __stack.stack)[index])
 
 #define stack_init(start_n, TYPE, mode)				__stack_init(start_n, sizeof(TYPE), mode)

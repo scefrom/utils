@@ -13,7 +13,7 @@
 
 typedef struct node_t node_t;
 
-typedef int8_t node_value_fn(bfr_t *, bfr_t*, node_t);
+typedef int8_t node_value_fn(bfr_t *, bfr_t, node_t);
 
 struct node_t {
 	uint16_t id; //what am i?
@@ -30,7 +30,7 @@ void node_free_node(node_t node);
 
 node_t *node_adopt(node_t *parent, node_t child); //bruhhhhhh adopt frfr :skull: :skull: :skull: *goofy fart sound* *goofy alarm sound*
 
-void node_tbfr(bfr_t *bfr, bfr_t *src, node_t node, char **id_map, node_value_fn *value_fn, size_t rec);
+void node_tbfr(bfr_t *bfr, bfr_t src, node_t node, char **id_map, node_value_fn *value_fn, size_t rec);
 
 
 
