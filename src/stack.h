@@ -5,6 +5,12 @@
 #ifndef __STACK_H
 #define __STACK_H
 
+#define stack_push(stack, X)						__stack_push(stack, (void*) &(X))
+#define stack_pop(stack)							__stack_pop(stack)
+
+#define stack_init(start_n, mode, TYPE)				__stack_init(start_n, sizeof(TYPE), mode)
+#define stack_free(stack)							__stack_free(stack)
+
 #include "commons.h"
 
 
@@ -20,11 +26,18 @@ typedef struct {
 	void *stack;
 	size_t index;
 	size_t size;
+
+	size_t __el_size;
+	uint8_t __grow_mode;
 } stack_t;
 
 
 
-stack_t stack_init(size_t start_size, size_t el_size, uint8_t grow_mode);
+size_t __stack_push(stack_t *stack, void *data);
+void *__stack_pop(stack_t *stack);
+
+stack_t __stack_init(size_t start_n, size_t el_size, uint8_t grow_mode);
+void __stack_free(stack_t stack);
 
 
 
