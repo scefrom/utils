@@ -19,7 +19,7 @@ int main(int argc, char **argv) {
 	stack_push(stack, x);
 
 	for (size_t i = 0; i < stack.index; i++) {
-		printf("element: %d\n", stack_fetch(stack, i));
+		printf("element: %d\n", stack_fetch(stack, i, size_t));
 	}
 
 	printf("\nsize: %ld\n", stack.size);
