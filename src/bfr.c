@@ -6,7 +6,7 @@
 
 
 
-bfr_t* bfr_from_fstr(uint8_t null, const char *format, ...) {
+bfr_t bfr_from_fstr(uint8_t null, const char *format, ...) {
 	va_list alist, blist;
 	va_start(alist, format);
 	va_copy(blist, alist);
@@ -59,16 +59,14 @@ size_t bfr_append(bfr_t *bfr, bfr_t abfr) {
 
 
 
-bfr_t* bfr_init(uint8_t *src, size_t size) {
-	bfr_t *bfr = malloc(sizeof(bfr_t));
-	bfr->bfr = src;
-	bfr->index = size;
-	bfr->size = size;
-
-	return bfr;
+bfr_t bfr_init(uint8_t *src, size_t size) {
+	return (bfr_t) {
+		.bfr = src,
+		.index = size,
+		.size = size
+	};
 }
 
-void bfr_free(bfr_t *bfr) {
-	free(bfr->bfr);
-	free(bfr);
+void bfr_free(bfr_t bfr) {
+	free(bfr.bfr);
 }

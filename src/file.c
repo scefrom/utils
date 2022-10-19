@@ -5,23 +5,74 @@
 //#include <unistd.h>
 //#include <limits.h>
 
-bfr_t* file_read_bfile_from_file(FILE *file) {
-	if (file == NULL) return NULL;
+
+
+uint8_t file_read_file_from_file(bfr_t *dest, FILE *file) {
+	if (file == NULL) return 0;
 
 	fseek(file, 0L, SEEK_END);
 
 	size_t size = ftell(file);
-	bfr_t *bfr = bfr_init((uint8_t*) malloc(size * sizeof(uint8_t)), size);
+	*dest = bfr_init((uint8_t*) malloc(size * sizeof(uint8_t)), size);
 
 	rewind(file);
 
-	fread(bfr->bfr, size, sizeof(uint8_t), file);
+	fread(dest->bfr, size, sizeof(uint8_t), file);
 
-	return bfr;
+	return 1;
 }
 
-bfr_t* file_read_tfile_from_file(FILE *file) {
-	bfr_t *bfr;
+uint8_t file_read_file_from_file_null(bfr_t *dest, FILE *file) {
+	if (!file_read_file_from_file(dest, file)) return 0;
+
+	dest->bfr = realloc(dest->bfr, (dest->size + 1) * sizeof(char));
+	dest->bfr[dest->size++] = 0;
+	dest->index++;
+
+	return 1;
+}
+
+uint8_t file_read_file(bfr_t *dest, const char *name) {
+	FILE *file = fopen(name, "r");
+	if (file != NULL) {
+		uint8_t r = file_read_file_from_file(dest, file);
+		fclose(file);
+
+		return r;
+	}
+
+	return 0;
+}
+
+uint8_t file_read_file_null(bfr_t *dest, const char *name) {
+	FILE *file = fopen(name, "r");
+	if (file != NULL) {
+		uint8_t r = file_read_file_from_file_null(dest, file);
+		fclose(file);
+
+		return r;
+	}
+
+	return 0;
+}
+
+/*uint8_t file_read_bfile_from_file(FILE *file, bfr_t *dest) {
+	if (file == NULL) return 0;
+
+	fseek(file, 0L, SEEK_END);
+
+	size_t size = ftell(file);
+	*dest = bfr_init((uint8_t*) malloc(size * sizeof(uint8_t)), size);
+
+	rewind(file);
+
+	fread(dest->bfr, size, sizeof(uint8_t), file);
+
+	return 1;
+}
+
+uint8_t file_read_tfile_from_file(FILE *, bfr_t *dest) {
+	if (!file_read_bfile_from_file())
 	if ((bfr = file_read_bfile_from_file(file)) == NULL) return NULL;
 
 	bfr->bfr = realloc(bfr->bfr, (bfr->size + 1) * sizeof(char));
@@ -47,7 +98,7 @@ bfr_t* file_read_tfile(const char *name) {
 
 	fclose(file);
 	return bfr;
-}
+}*/
 
 /*bfr_t* file_read_bfile_spath(char *dir_path, char *file_path) {
 	char cwd[PATH_MAX];
@@ -77,22 +128,23 @@ bfr_t* file_read_tfile_spath(char *dir_path, char *file_path) {
 
 
 
-uint8_t file_write_file_from_file(FILE *file, bfr_t *bfr) {
-	if (file == NULL)
-		return 0;
+uint8_t file_write_file_from_file(FILE *file, bfr_t src) {
+	if (file == NULL) return 0;
 
-	fwrite(bfr->bfr, 1, bfr->size, file);
+	fwrite(src.bfr, 1, src.size, file);
 	return 1;
 }
 
-uint8_t file_write_file(const char *name, bfr_t *bfr) {
+uint8_t file_write_file(const char *name, bfr_t src) {
 	FILE *file = fopen(name, "w+");
+	if (file != NULL) {
+		uint8_t r = file_write_file_from_file(file, src);
+		fclose(file);
 
-	if (!file_write_file_from_file(file, bfr))
-		return 0;
+		return r;
+	}
 
-	fclose(file);
-	return 1;
+	return 0;
 }
 
 

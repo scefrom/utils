@@ -25,12 +25,12 @@ typedef struct {
 
 
 
-bfr_t* bfr_from_fstr(uint8_t null, const char *format, ...);
+bfr_t bfr_from_fstr(uint8_t null, const char *format, ...);
 
 size_t bfr_write(bfr_t *bfr, bfr_t abfr);
 size_t bfr_append(bfr_t *bfr, bfr_t abfr);
 
-bfr_t* bfr_init(uint8_t *bfr, size_t size);
-void bfr_free(bfr_t *bfr);
+bfr_t bfr_init(uint8_t *bfr, size_t size);
+void bfr_free(bfr_t bfr);
 
 #endif
