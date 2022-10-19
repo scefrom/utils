@@ -13,7 +13,7 @@
 #define BFR_FROM_STR(S)					((bfr_t) {.bfr = (uint8_t*) (S), .index = 0, .size = strlen(S) + 1})
 #define BFR_FROM_STR_NO_NULL(S)			((bfr_t) {.bfr = (uint8_t*) (S), .index = 0, .size = strlen(S)})
 
-#define BFR_GET_STR(B, I)				((char*) ((B)->bfr + (I)))
+#define BFR_GET_STR(B, I)				((char*) ((B).bfr + (I)))
 
 
 
