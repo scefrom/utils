@@ -16,8 +16,8 @@
 
 
 enum { //if we want to push but we dont have enough space: (index == size)
-	GROW_LEAST, //grow one slot
-	GROW_FIXED2 //double the size (to use this, make sure start_size is at least > 0 (0 * 2 = 0, so no gain in that case))
+	STACK_GROW_LEAST, //grow one slot
+	STACK_GROW_FIXED2 //double the size (to use this, make sure start_size is at least > 0 (0 * 2 = 0, so no gain in that case))
 };
 
 

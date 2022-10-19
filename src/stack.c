@@ -8,8 +8,8 @@
 size_t __stack_push(stack_t *stack, void *data) {
 	if (stack->index == stack->size) {
 		switch (stack->__grow_mode) {
-			case GROW_LEAST: stack->stack = realloc(stack->stack, (++stack->size) * stack->__el_size); break;
-			case GROW_FIXED2: stack->stack = realloc(stack->stack, (stack->size <<= 1) * stack->__el_size); break;
+			case STACK_GROW_LEAST: stack->stack = realloc(stack->stack, (++stack->size) * stack->__el_size); break;
+			case STACK_GROW_FIXED2: stack->stack = realloc(stack->stack, (stack->size <<= 1) * stack->__el_size); break;
 		}
 	}
 
