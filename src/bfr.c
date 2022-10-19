@@ -68,5 +68,6 @@ bfr_t bfr_init(uint8_t *src, size_t size) {
 }
 
 void bfr_free(bfr_t bfr) {
-	free(bfr.bfr);
+	if (bfr.bfr != NULL)
+		free(bfr.bfr);
 }

@@ -7,6 +7,8 @@
 
 
 
+#define BFR_NULL						((bfr_t) {.bfr = NULL .index = 0, .size = 0})
+
 #define BFR_FROM_CONST(C)				((bfr_t) {.bfr = (uint8_t*) (C), .index = 0, .size = sizeof(C)})
 #define BFR_FROM_CONST_NO_NULL(C)		((bfr_t) {.bfr = (uint8_t*) (C), .index = 0, .size = sizeof(C) - 1})
 
